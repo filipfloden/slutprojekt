@@ -5,15 +5,54 @@
     <title>Hello World!</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <h1>Windows app</h1>
+
+
+
+
+
 
     <script>
       // You can also require other files to run in this process
       require('./renderer.js')
+    </script>
+    <script>
+      var mysql = require('/node_modules/mysql');
+
+      // Add the credentials to access your database
+      var connection = mysql.createConnection({
+          host     : 'localhost',
+          user     : 'root',
+          password : null, // or the original password : 'apaswword'
+          database : 'highscore'
+      });
+
+      // connect to mysql
+      connection.connect(function(err) {
+          // in case of error
+          if(err){
+              console.log(err.code);
+              console.log(err.fatal);
+          }
+      });
+
+      // Perform a query
+      $query = 'SELECT * FROM `highscore` LIMIT 10';
+
+      connection.query($query, function(err, rows, fields) {
+          if(err){
+              console.log("An error ocurred performing the query.");
+              console.log(err);
+              return;
+          }
+
+          console.log("Query succesfully executed", rows);
+      });
+
+      // Close the connection
+      connection.end(function(){
+          // The connection has been closed
+      });
     </script>
   </body>
 </html>

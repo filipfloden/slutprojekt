@@ -9,3 +9,18 @@ canvas {
     border:1px solid #d3d3d3;
     background-color: #f1f1f1;
 }
+#gameArea{
+    width: 500px;
+    height: 500px;
+    background-color: lightblue;
+}
+#sushi{
+    margin-top: 130px;
+}
+.make-bigger{
+    animation: make_bigger 0.3s 1;
+}
+@keyframes make_bigger {
+    from { width: 150px; height: 130px; }
+    to { width: 160px; height: 135px; }
+} 

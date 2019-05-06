@@ -8,9 +8,9 @@ body{
     overflow: hidden;
 }
 body::after{
-    background-image: url('bilder/background.jpg');
+    background-image: url('../bilder/background.jpg');
     content: "";
-    opacity: 0.1;
+    opacity: 0.04;
     position: absolute;
     top: 0;
     bottom: 0;

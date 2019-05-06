@@ -4,26 +4,64 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
     <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="bar.css">
+    
   </head>
-  <body>
+  <body onload="startAuto()">
 
-    <div id="gameArea">
-        <center>
+    <div id="title-bar">
+        <div id="title">
+            <img src="bilder/worker.png" width="20px" height="20px">
+            Sushi Clicker!
+        </div>
+        <div id="title-bar-btns">
+            <button id="close-btn">&times;</button>
+        </div>
+    </div>
+
+
+    <div id="main">
         <h1>Sushi Clicker!</h1>
+        <h1 id="clicks"></h1>
 
-        <h1 id="clicks">0</h1>
-        <img id="sushi" class="make-bigger" src="bilder/sushi.png" width="150px" height="120px">
-        </center>
+        <img id="sushi" class="make-bigger" src="bilder/sushi.png" alt="Sushi Bit" width="500px" height="400px">
+    </div>
+
+    <div class="shop">
+        <img src="bilder/shop.png" alt="SHOP" width="200px" height="167px">
+        <div class="section">
+            <button class="btn-shop"></button>
+            <p>Increases click value with 20%</p>
+        </div>
+        <div class="section">
+            <button class="btn-shop">Worker</button>
+            <p>Hires 1 more worker</p>
+            <p>Buy workers to increase production efficiency</p>
+        </div>
+        <div class="section">
+            <button class="btn-shop">Restaurant</button>
+            <p>Builds 1 more restaurant</p>
+            <p>Buy restaurants to moderately increase production efficiency</p>
+        </div>
+        <div class="section">
+            <button class="btn-shop">Factory</button>
+            <p>Build 1 entire factory</p>
+            <p>Buy factories to hugely increase production efficiency</p>
+        </div>
+        <div class="section">
+            <button class="btn-shop">Production</button>
+            <p>Doubles entire production value</p>
+        </div>
     </div>
     
-    
-    <br>
-    <input type="button" id="action-btn" value="Retrieve 10 first rows in the database" />
-    <table id="table" style="border: solid 1px black;">
-        <tbody>
-            
-        </tbody>
-    </table>
+    <input type="button" id="save-btn" value="Save progress!"/>
+
+    <div id="statistics">
+        <h3 class="statistics">Workers: </h3>
+        <h3 class="statistics">Restaurants: </h3>
+        <h3 class="statistics">Factories: </h3>
+        <h3 class="statistics">Production: </h3>
+    </div>
 
     <script>
       // You can also require other files to run in this process
@@ -31,92 +69,182 @@
     </script>
 
 
+
+
     <script>
-        var count = 0;
+        var amount = 0;
+        var clickValue = 1;
+        var workers = 0;
+        var restaurants = 0;
+        var factories = 0;
+        var production = 1;
+        var clickPrice = 50;
+        var workerPrice = 160;
+        var restaurantPrice = 1400;
+        var factoryPrice = 12000;
+        var productionPrice = 500;
+        var auto = 0;
+
+        var mysql = require('mysql');
+
+        var connection = mysql.createConnection({
+            host     : 'localhost',
+            user     : 'root',
+            password : null,
+            database : 'windows_app'
+        });
+
+        let getData = "SELECT * FROM stats"
+
+        connection.query(getData, (error, results, fields) => {
+            if (error){
+                return console.error(error.message);
+            }
+            results.forEach(function(data){
+                amount += parseInt(data.sushis);
+                clickValue += parseInt(data.click);
+                workers += parseInt(data.workers);
+                restaurants += parseInt(data.restaurants);
+                factories += parseInt(data.factories);
+                production += parseInt(data.production);
+                clickPrice += parseInt(data.clickPrice);
+                workerPrice += parseInt(data.workerPrice);
+                restaurantPrice += parseInt(data.restaurantPrice);
+                factoryPrice += parseInt(data.factoryPrice);
+                productionPrice += parseInt(data.productionPrice);
+
+                updateText();
+            });
+        });
+
+
         var sushi = document.getElementById('sushi');
-        sushi.addEventListener('click', function(e){ 
+        sushi.addEventListener('click', function(){ 
+
             sushi.classList.remove('make-bigger');
 
             void sushi.offsetWidth;
 
             sushi.classList.add('make-bigger');
-            
-            count++;
-            document.getElementById('clicks').innerHTML = count; 
+
+            amount += clickValue;
+            document.getElementById('clicks').innerHTML = amount.toFixed(0); 
         }, false); 
-    </script>
 
-<script>
-  var mysql = require('mysql');
+        document.getElementsByClassName('btn-shop')[0].addEventListener('click', function(){
+            if (amount >= clickPrice) {
+                amount -= clickPrice;
+                clickPrice *= 1.10;
+                clickPrice = clickPrice.toFixed(0);
+                clickValue *= 1.20;
+                updateText();
+            }
+        });
+        document.getElementsByClassName('btn-shop')[1].addEventListener('click', function(){ 
+            if (amount >= workerPrice) {
+                amount -= workerPrice;
+                workerPrice *= 1.20;
+                workerPrice = workerPrice.toFixed(0);
+                workers++;
+                updateText();
+            }
+        });
+        document.getElementsByClassName('btn-shop')[2].addEventListener('click', function(){ 
+            if (amount >= restaurantPrice) {
+                amount -= restaurantPrice;
+                restaurantPrice *= 1.35;
+                restaurantPrice = restaurantPrice.toFixed(0);
+                restaurants++;;
+                updateText();
+            }
 
-function el(selector) {
-    return document.getElementById(selector);
-}
-
-el('action-btn').addEventListener('click', function(){
-    // Get the mysql service
-    getFirstTenRows(function(rows){
-        var html = '';
-
-        rows.forEach(function(highscore){
-            html += '<tr>';
-            html += '<td>';
-            html += highscore.id;
-            html += '</td>';
-            html += '<td>';
-            html += highscore.user;
-            html += '</td>';
-            html += '<td>';
-            html += highscore.highscore;
-            html += '</td>';
-            html += '</tr>';
-            console.log(highscore);
+        });
+        document.getElementsByClassName('btn-shop')[3].addEventListener('click', function(){
+            if (amount >= factoryPrice) {
+                amount -= factoryPrice;
+                factoryPrice *= 1.45;
+                factoryPrice = factoryPrice.toFixed(0);
+                factories++;
+                updateText();
+            }
+        });
+        document.getElementsByClassName('btn-shop')[4].addEventListener('click', function(){ 
+            if (amount >= productionPrice) {
+                amount -= productionPrice;
+                productionPrice *= 7.48;
+                productionPrice = productionPrice.toFixed(0);
+                production++;
+                updateText();
+            }
         });
 
-        document.querySelector('#table > tbody').innerHTML = html;
-    });
-},false);
+        function startAuto() {
+            auto = (workers * 1 + restaurants * 10 + factories * 100) * production;
+            amount += auto;
 
-function getFirstTenRows(callback){
-    var mysql = require('mysql');
-
-    // Add the credentials to access your database
-    var connection = mysql.createConnection({
-        host     : 'localhost',
-        user     : 'root',
-        password : null,
-        database : 'windows_app'
-    });
-
-    // connect to mysql
-    connection.connect(function(err) {
-        // in case of error
-        if(err){
-            console.log(err.code);
-            console.log(err.fatal);
-        }
-    });
-
-    // Perform a query
-    $query = "INSERT INTO `stats` WHERE `id=1` (`sushis`, `upgrade1`, `upgrade2`, `upgrade3`, `upgrade4`, `upgrade5`, `price1`, `price2`, `price3`, `price4`, `price5`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12])"
-
-    connection.query($query, function(err, rows, fields) {
-        if(err){
-            console.log("An error ocurred performing the query.");
-            console.log(err);
-            return;
+            document.getElementById('clicks').innerHTML = amount.toFixed(0);
+            //autoSave();
+            var t = setTimeout(startAuto, 100);
         }
 
-        callback(rows);
+        function updateText() {
+            document.getElementById('clicks').innerHTML = amount.toFixed(0);
+            document.getElementsByClassName('statistics')[0].innerHTML = "Workers: " + workers;
+            document.getElementsByClassName('statistics')[1].innerHTML = "Restaurants: " + restaurants;
+            document.getElementsByClassName('statistics')[2].innerHTML = "Factories: " + factories;
+            document.getElementsByClassName('statistics')[3].innerHTML = "Production: " + production + "x";
+            document.getElementsByClassName('btn-shop')[0].innerHTML = "Click Value" + "<br>" + "Price: " + clickPrice;
+            document.getElementsByClassName('btn-shop')[1].innerHTML = "Worker" + "<br>" + "Price: " + workerPrice;
+            document.getElementsByClassName('btn-shop')[2].innerHTML = "Shop" + "<br>" + "Price: " + restaurantPrice;
+            document.getElementsByClassName('btn-shop')[3].innerHTML = "Factory" + "<br>" + "Price: " + factoryPrice;
+            document.getElementsByClassName('btn-shop')[4].innerHTML = "Production" + "<br>" + "Price: " + productionPrice;
+        }
 
-        console.log("Query succesfully executed");
-    });
+        document.getElementById('save-btn').addEventListener('click', function() {
+            autoSave();
+        });
 
-    // Close the connection
-    connection.end(function(){
-        // The connection has been closed
-    });
-}
-</script>
+        function autoSave(){
+
+            let sql = `UPDATE stats
+            SET sushis = ?,
+            click = ?,
+            workers = ?,
+            restaurants = ?,
+            factories = ?,
+            production = ?,
+            clickPrice = ?,
+            workerPrice = ?,
+            restaurantPrice = ?,
+            factoryPrice = ?,
+            productionPrice = ?
+            WHERE id = 1`;
+            let data = [amount, clickValue, workers, restaurants, factories, production, clickPrice, workerPrice, restaurantPrice, factoryPrice, productionPrice];
+
+
+            // execute the UPDATE statement
+            connection.query(sql, data, (error, results, fields) => {
+                if (error){
+                    return console.error(error.message);
+                }
+            });
+
+        };
+        
+    </script>
+
+    <script>
+            function init() { 
+                document.getElementById("close-btn").addEventListener("click", function (e) {
+                    window.close();
+                }); 
+            }; 
+
+            document.onreadystatechange = function () {
+                if (document.readyState == "complete") {
+                    init(); 
+                }
+            };
+    </script>
   </body>
 </html>

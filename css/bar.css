@@ -4,17 +4,27 @@
     background-color: lightseagreen;
     padding: none;
     margin: 0px; 
-   }
+}
    
-   #title {
+#title {
     position: fixed;
     top: 2px;
     left: 6px; 
-   }
-   
-   #title-bar-btns {
+}
+#close-btn{
     -webkit-app-region: no-drag;
     position: fixed;
     top: 0px;
-    right: 6px;
-   }
+    right: -1px;
+    width: 30px;
+    height: 24px;
+    font-size: 125%;
+    border: none;
+    background-color: lightseagreen;
+    color: white;
+}
+#close-btn:hover{
+    background-color: teal;
+    color: red;
+    cursor: pointer;
+}

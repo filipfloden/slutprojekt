@@ -14,9 +14,7 @@
             <img src="bilder/worker.png" width="20px" height="20px">
             Sushi Clicker!
         </div>
-        <div id="title-bar-btns">
-            <button id="close-btn">&times;</button>
-        </div>
+        <button id="close-btn">&times;</button>
     </div>
 
 
@@ -72,6 +70,20 @@
 
 
     <script type="text/javascript" src="javascript/javascript.js"></script>
+
+    <script>
+        function init() { 
+            document.getElementById("close-btn").addEventListener("click", function (e) {
+                window.close();
+            }); 
+        }; 
+
+        document.onreadystatechange = function () {
+            if (document.readyState == "complete") {
+                init(); 
+            }
+        };
+    </script>
     
   </body>
 </html>

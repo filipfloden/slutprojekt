@@ -1,0 +1,112 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: lightblue;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    overflow: hidden;
+}
+body::after{
+    background-image: url('../bilder/background.jpg');
+    content: "";
+    opacity: 0.04;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -1; 
+}
+@media(min-width: 630px){
+    #main{
+        width: 74%;
+        float: left;
+    }
+    .shop{
+        width: 25%;
+        float: right;
+    }
+    .shop p{
+        font-size: 70%;
+    }
+    #save-btn{
+        position: absolute;
+        bottom:   0;
+    }
+}
+#main{
+    display: block;
+    text-align: center;
+}
+#sushi{
+    display: block;
+    margin: 7% auto 0 auto;
+    position: relative;
+}
+.make-bigger{
+    animation: make_bigger 0.1s 1;
+}
+@keyframes make_bigger {
+    from { width: 500px; height: 400px; }
+    to { width: 520px; height: 410px; }
+} 
+#statistics{
+    position: fixed;
+}
+.shop{
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.4);
+    height: 100vh;
+}
+.shop img{
+    margin-top: -15px;
+    margin-bottom: -30px;
+}
+.shop p{
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 3%;
+}
+.section{
+    padding-bottom: 5%;
+}
+.btn-shop{
+    display: block;
+    width: 80%;
+    margin: 5% 0 0 10%;
+    border: solid 1px darkgray;
+    background-image: linear-gradient(to bottom, #9EB847, #FEBF10);
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    padding: 7px;
+    transition: transform .3s;
+}
+.btn-shop:hover{
+    transform: scale(1.05);
+    background-image: linear-gradient(to bottom, #ABFF5C, #5CFF5E, #5CFFB0);
+    color: black;
+}
+.btn-shop:focus{
+    outline-style: none;
+}
+#save-btn{
+    margin: 0 0 3% 2%;
+    padding: 10px;
+    display: block;
+    width: 70%;
+    float: left;
+    border: solid 1px darkgray;
+    background-image: linear-gradient(to bottom, #9EB847, #FEBF10);
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+#save-btn:hover{
+    background-image: linear-gradient(to bottom, #ABFF5C, #5CFF5E, #5CFFB0);
+    color: black;
+}
+#save-btn:focus{
+    outline-style: none;
+}

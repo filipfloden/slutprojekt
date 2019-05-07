@@ -3,27 +3,63 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/bar.css">
+
   </head>
-  <body>
+  <body onload="startAuto()">
 
-    <div id="gameArea">
-        <center>
-        <h1>Sushi Clicker!</h1>
-
-        <h1 id="clicks">0</h1>
-        <img id="sushi" class="make-bigger" src="bilder/sushi.png" width="150px" height="120px">
-        </center>
+    <div id="title-bar">
+        <div id="title">
+            <img src="bilder/worker.png" width="20px" height="20px">
+            Sushi Clicker!
+        </div>
+        <button id="close-btn">&times;</button>
     </div>
-    
-    
-    <br>
-    <input type="button" id="action-btn" value="Retrieve 10 first rows in the database" />
-    <table id="table" style="border: solid 1px black;">
-        <tbody>
-            
-        </tbody>
-    </table>
+
+
+    <div id="main">
+        <h1>Sushi Clicker!</h1>
+        <h1 id="clicks"></h1>
+
+        <img id="sushi" class="make-bigger" src="bilder/sushi.png" alt="Sushi Bit" width="500px" height="400px">
+    </div>
+
+    <div class="shop">
+        <img src="bilder/shop.png" alt="SHOP" width="200px" height="167px">
+        <div class="section">
+            <button class="btn-shop"></button>
+            <p>Increases click value with 20%</p>
+        </div>
+        <div class="section">
+            <button class="btn-shop">Worker</button>
+            <p>Hires 1 more worker</p>
+            <p>Buy workers to increase production efficiency</p>
+        </div>
+        <div class="section">
+            <button class="btn-shop">Restaurant</button>
+            <p>Builds 1 more restaurant</p>
+            <p>Buy restaurants to moderately increase production efficiency</p>
+        </div>
+        <div class="section">
+            <button class="btn-shop">Factory</button>
+            <p>Build 1 entire factory</p>
+            <p>Buy factories to hugely increase production efficiency</p>
+        </div>
+        <div class="section">
+            <button class="btn-shop">Production</button>
+            <p>Doubles entire production value</p>
+        </div>
+    </div>
+
+    <input type="button" id="save-btn" value="Save progress!"/>
+
+    <div id="statistics">
+        <h3 class="statistics">Workers: </h3>
+        <h3 class="statistics">Restaurants: </h3>
+        <h3 class="statistics">Factories: </h3>
+        <h3 class="statistics">Production: </h3>
+    </div>
 
     <script>
       // You can also require other files to run in this process
@@ -31,27 +67,23 @@
     </script>
 
 
+
+
+    <script type="text/javascript" src="javascript/javascript.js"></script>
+
     <script>
-        var count = 0;
-        var sushi = document.getElementById('sushi');
-        sushi.addEventListener('click', function(e){ 
-            sushi.classList.remove('make-bigger');
+        function init() {
+            document.getElementById("close-btn").addEventListener("click", function (e) {
+                window.close();
+            });
+        };
 
-            void sushi.offsetWidth;
-
-            sushi.classList.add('make-bigger');
-            
-            count++;
-            document.getElementById('clicks').innerHTML = count; 
-        }, false); 
+        document.onreadystatechange = function () {
+            if (document.readyState == "complete") {
+                init();
+            }
+        };
     </script>
-
-<script>
-  var mysql = require('mysql');
-
-function el(selector) {
-    return document.getElementById(selector);
-}
 
 function getFirstTenRows(callback){
     var mysql = require('mysql');

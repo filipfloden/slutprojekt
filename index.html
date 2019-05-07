@@ -53,30 +53,6 @@ function el(selector) {
     return document.getElementById(selector);
 }
 
-el('action-btn').addEventListener('click', function(){
-    // Get the mysql service
-    getFirstTenRows(function(rows){
-        var html = '';
-
-        rows.forEach(function(highscore){
-            html += '<tr>';
-            html += '<td>';
-            html += highscore.id;
-            html += '</td>';
-            html += '<td>';
-            html += highscore.user;
-            html += '</td>';
-            html += '<td>';
-            html += highscore.highscore;
-            html += '</td>';
-            html += '</tr>';
-            console.log(highscore);
-        });
-
-        document.querySelector('#table > tbody').innerHTML = html;
-    });
-},false);
-
 function getFirstTenRows(callback){
     var mysql = require('mysql');
 
@@ -98,7 +74,7 @@ function getFirstTenRows(callback){
     });
 
     // Perform a query
-    $query = "INSERT INTO `stats` WHERE `id=1` (`sushis`, `upgrade1`, `upgrade2`, `upgrade3`, `upgrade4`, `upgrade5`, `price1`, `price2`, `price3`, `price4`, `price5`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12])"
+    $query = "";
 
     connection.query($query, function(err, rows, fields) {
         if(err){

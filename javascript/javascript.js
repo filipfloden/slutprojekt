@@ -48,7 +48,10 @@ connection.query(getData, (error, results, fields) => {
 
 var sushi = document.getElementById('sushi');
 sushi.addEventListener('click', function(){ 
+    click(); 
 
+}); 
+function click(){
     sushi.classList.remove('make-bigger');
 
     void sushi.offsetWidth;
@@ -57,7 +60,13 @@ sushi.addEventListener('click', function(){
 
     amount += clickValue;
     document.getElementById('clicks').innerHTML = amount.toFixed(0); 
-}, false); 
+}
+
+document.onkeypress=function(e){
+    if (e.keyCode == 32) {
+        click();
+    }
+}
 
 document.getElementsByClassName('btn-shop')[0].addEventListener('click', function(){
     if (amount >= clickPrice) {

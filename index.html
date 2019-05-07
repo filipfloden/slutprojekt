@@ -66,65 +66,6 @@
       require('./renderer.js')
     </script>
 
-
-
-
     <script type="text/javascript" src="javascript/javascript.js"></script>
-
-    <script>
-        function init() {
-            document.getElementById("close-btn").addEventListener("click", function (e) {
-                window.close();
-            });
-        };
-
-        document.onreadystatechange = function () {
-            if (document.readyState == "complete") {
-                init();
-            }
-        };
-    </script>
-
-function getFirstTenRows(callback){
-    var mysql = require('mysql');
-
-    // Add the credentials to access your database
-    var connection = mysql.createConnection({
-        host     : 'localhost',
-        user     : 'root',
-        password : null,
-        database : 'windows_app'
-    });
-
-    // connect to mysql
-    connection.connect(function(err) {
-        // in case of error
-        if(err){
-            console.log(err.code);
-            console.log(err.fatal);
-        }
-    });
-
-    // Perform a query
-    $query = "";
-
-    connection.query($query, function(err, rows, fields) {
-        if(err){
-            console.log("An error ocurred performing the query.");
-            console.log(err);
-            return;
-        }
-
-        callback(rows);
-
-        console.log("Query succesfully executed");
-    });
-
-    // Close the connection
-    connection.end(function(){
-        // The connection has been closed
-    });
-}
-</script>
   </body>
 </html>

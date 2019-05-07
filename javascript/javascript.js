@@ -121,7 +121,7 @@ function updateText() {
     document.getElementsByClassName('statistics')[3].innerHTML = "Production: " + production + "x";
     document.getElementsByClassName('btn-shop')[0].innerHTML = "Click Value" + "<br>" + "Price: " + clickPrice;
     document.getElementsByClassName('btn-shop')[1].innerHTML = "Worker" + "<br>" + "Price: " + workerPrice;
-    document.getElementsByClassName('btn-shop')[2].innerHTML = "Shop" + "<br>" + "Price: " + restaurantPrice;
+    document.getElementsByClassName('btn-shop')[2].innerHTML = "Restaurant" + "<br>" + "Price: " + restaurantPrice;
     document.getElementsByClassName('btn-shop')[3].innerHTML = "Factory" + "<br>" + "Price: " + factoryPrice;
     document.getElementsByClassName('btn-shop')[4].innerHTML = "Production" + "<br>" + "Price: " + productionPrice;
 }

@@ -2,6 +2,12 @@
     margin: 0;
     padding: 0;
 }
+*::selection{
+    background: transparent;
+}
+*:hover{
+    cursor: default;
+}
 body{
     background-color: lightblue;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

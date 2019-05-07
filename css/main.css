@@ -36,7 +36,7 @@ body::after{
     .shop p{
         font-size: 70%;
     }
-    #save-btn{
+    #save-btn, #reset-btn{
         position: absolute;
         bottom:   0;
     }
@@ -97,11 +97,11 @@ body::after{
 .btn-shop:focus{
     outline-style: none;
 }
-#save-btn{
+#save-btn, #reset-btn{
     margin: 0 0 3% 2%;
     padding: 10px;
     display: block;
-    width: 70%;
+    width: 35%;
     float: left;
     border: solid 1px darkgray;
     background-image: linear-gradient(to bottom, #9EB847, #FEBF10);
@@ -109,10 +109,13 @@ body::after{
     color: black;
     cursor: pointer;
 }
-#save-btn:hover{
+#save-btn:hover, #reset-btn:hover{
     background-image: linear-gradient(to bottom, #ABFF5C, #5CFF5E, #5CFFB0);
     color: black;
 }
-#save-btn:focus{
+#save-btn:focus #reset-btn:focus{
     outline-style: none;
+}
+#reset-btn{
+    margin-left: 38%;
 }

@@ -1,14 +1,16 @@
+// 0, 1, 0, 0, 0, 1, 50, 160, 1400, 12000, 500
+
 var amount = 0;
-var clickValue = 1;
+var clickValue = 0;
 var workers = 0;
 var restaurants = 0;
 var factories = 0;
-var production = 1;
-var clickPrice = 50;
-var workerPrice = 160;
-var restaurantPrice = 1400;
-var factoryPrice = 12000;
-var productionPrice = 500;
+var production = 0;
+var clickPrice = 0;
+var workerPrice = 0;
+var restaurantPrice = 0;
+var factoryPrice = 0;
+var productionPrice = 0;
 var auto = 0;
 
 var mysql = require('mysql');
@@ -62,7 +64,7 @@ document.getElementsByClassName('btn-shop')[0].addEventListener('click', functio
         amount -= clickPrice;
         clickPrice *= 1.10;
         clickPrice = clickPrice.toFixed(0);
-        clickValue *= 1.20;
+        clickValue += 0.40;
         updateText();
     }
 });
@@ -97,7 +99,7 @@ document.getElementsByClassName('btn-shop')[3].addEventListener('click', functio
 document.getElementsByClassName('btn-shop')[4].addEventListener('click', function(){ 
     if (amount >= productionPrice) {
         amount -= productionPrice;
-        productionPrice *= 7.48;
+        productionPrice *= 12.48;
         productionPrice = productionPrice.toFixed(0);
         production++;
         updateText();
@@ -105,7 +107,7 @@ document.getElementsByClassName('btn-shop')[4].addEventListener('click', functio
 });
 
 function startAuto() {
-    auto = (workers * 1 + restaurants * 10 + factories * 100) * production;
+    auto = (workers * 0.10 + restaurants * 1 + factories * 10) * production;
     amount += auto;
 
     document.getElementById('clicks').innerHTML = amount.toFixed(0);
@@ -129,11 +131,40 @@ function updateText() {
 document.getElementById('save-btn').addEventListener('click', function() {
     autoSave();
 });
+document.getElementById('reset-btn').addEventListener('click', function() {
+    
+    let sql = `UPDATE stats
+    SET 
+    sushis = ?,
+    click = ?,
+    workers = ?,
+    restaurants = ?,
+    factories = ?,
+    production = ?,
+    clickPrice = ?,
+    workerPrice = ?,
+    restaurantPrice = ?,
+    factoryPrice = ?,
+    productionPrice = ?
+    WHERE id = 1`;
+    let data = [0, 1, 0, 0, 0, 1, 50, 160, 1400, 12000, 500];
+
+
+    // execute the UPDATE statement
+    connection.query(sql, data, (error, results, fields) => {
+        if (error){
+            return console.error(error.message);
+        }
+    });
+
+    window.location.reload();
+});
 
 function autoSave(){
 
     let sql = `UPDATE stats
-    SET sushis = ?,
+    SET 
+    sushis = ?,
     click = ?,
     workers = ?,
     restaurants = ?,

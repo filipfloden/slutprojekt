@@ -45,11 +45,18 @@ body::after{
     display: block;
     text-align: center;
 }
-#sushi{
+#sushi, #sushi-2{
     display: block;
     margin: 7% auto 0 auto;
     position: relative;
 }
+#sushi:hover, #sushi-2:hover{
+    cursor: pointer;
+}
+#sushi-2{
+    display: none;
+}
+
 .make-bigger{
     animation: make_bigger 0.1s 1;
 }

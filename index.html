@@ -23,13 +23,18 @@
         <h1 id="clicks"></h1>
 
         <img id="sushi" class="make-bigger" src="bilder/sushi.png" alt="Sushi Bit" width="500px" height="400px">
+        <img id="sushi-2" class="make-bigger" src="bilder/sushi-2.png" alt="Sushi Bit" width="500px" height="400px">
     </div>
 
     <div class="shop">
         <img src="bilder/shop.png" alt="SHOP" width="200px" height="167px">
         <div class="section">
-            <button class="btn-shop"></button>
-            <p>Increases click value with 20%</p>
+            <button class="btn-shop">Click Value</button>
+            <p>Increases click value with +1</p>
+        </div>
+        <div class="section">
+            <button class="btn-shop">Auto Clicker</button>
+            <p>Gives 0.1 CpS</p>
         </div>
         <div class="section">
             <button class="btn-shop">Worker</button>
@@ -57,10 +62,12 @@
 
     <div id="statistics">
         <h3 class="statistics">Click Value: </h3>
+        <h3 class="statistics">Auto Clickers: </h3>
         <h3 class="statistics">Workers: </h3>
         <h3 class="statistics">Restaurants: </h3>
         <h3 class="statistics">Factories: </h3>
         <h3 class="statistics">Production: </h3>
+        <input type="button" id="switch-sushi" value="Switch Sushi!"/>
     </div>
 
     <script>

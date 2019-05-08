@@ -126,10 +126,11 @@ function startAuto() {
 
 function updateText() {
     document.getElementById('clicks').innerHTML = amount.toFixed(0);
-    document.getElementsByClassName('statistics')[0].innerHTML = "Workers: " + workers;
-    document.getElementsByClassName('statistics')[1].innerHTML = "Restaurants: " + restaurants;
-    document.getElementsByClassName('statistics')[2].innerHTML = "Factories: " + factories;
-    document.getElementsByClassName('statistics')[3].innerHTML = "Production: " + production + "x";
+    document.getElementsByClassName('statistics')[0].innerHTML = "Click Value: " + clickValue.toFixed(2);
+    document.getElementsByClassName('statistics')[1].innerHTML = "Workers: " + workers;
+    document.getElementsByClassName('statistics')[2].innerHTML = "Restaurants: " + restaurants;
+    document.getElementsByClassName('statistics')[3].innerHTML = "Factories: " + factories;
+    document.getElementsByClassName('statistics')[4].innerHTML = "Production: " + production + "x";
     document.getElementsByClassName('btn-shop')[0].innerHTML = "Click Value" + "<br>" + "Price: " + clickPrice;
     document.getElementsByClassName('btn-shop')[1].innerHTML = "Worker" + "<br>" + "Price: " + workerPrice;
     document.getElementsByClassName('btn-shop')[2].innerHTML = "Restaurant" + "<br>" + "Price: " + restaurantPrice;

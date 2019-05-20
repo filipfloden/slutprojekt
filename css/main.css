@@ -24,7 +24,7 @@ body::after{
     left: 0;
     z-index: -1; 
 }
-@media(min-width: 630px){
+@media(min-width: 630px){ 
     #main{
         width: 74%;
         float: left;
@@ -125,4 +125,15 @@ body::after{
 }
 #reset-btn{
     margin-left: 38%;
+}
+#switch-sushi{
+    padding: 3% 6%;
+    margin: 2% 0 0 1%;
+    border: solid 1px darkgray;
+    background-image: linear-gradient(to bottom, #9EB847, #FEBF10);
+    text-decoration: none;
+}
+#switch-sushi:hover{
+    background-image: linear-gradient(to bottom, #ABFF5C, #5CFF5E, #5CFFB0);
+    cursor: pointer;
 }

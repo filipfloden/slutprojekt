@@ -69,7 +69,7 @@ function click(){
     sushi2.classList.add('make-bigger');
 
     amount += clickValue;
-    document.getElementById('clicks').innerHTML = amount.toFixed(0); 
+    document.getElementById('clicks').innerHTML = amount.toFixed(0);
 }
 document.getElementsByClassName('btn-shop')[0].addEventListener('click', function(){
     if (amount >= clickPrice) {
@@ -132,6 +132,7 @@ function startAuto() {
     amount += auto;
 
     document.getElementById('clicks').innerHTML = amount.toFixed(0);
+    document.getElementById('sPerSec').innerHTML = "SpS: " + auto.toFixed(1) * 10;
     //autoSave();
 
     setTimeout(startAuto, 100);
@@ -214,11 +215,11 @@ function autoSave(){
             return console.error(error.message);
         }
     });
-
 };
 
 function init() { 
     document.getElementById("close-btn").addEventListener("click", function (e) {
+        autoSave();
         window.close();
     }); 
 }; 
@@ -242,3 +243,28 @@ document.getElementById('switch-sushi').addEventListener('click', function() {
     }
     toggle = !toggle;
 });
+
+var toggleAC = false;
+var tid;
+
+function timer(t) {
+    document.getElementById('sushi').click();
+
+    tid = setTimeout(timer, t);
+}
+
+document.onkeydown = function (e) {
+    if (e.keyCode == 119) {
+        toggleAC = !toggleAC;
+
+        console.log(toggleAC);
+
+        if (toggleAC == true) {
+            timer(1);
+        }
+        else{
+            clearTimeout(tid);
+            tid = 0;
+        }
+    }
+};

@@ -127,13 +127,16 @@ document.getElementsByClassName('btn-shop')[5].addEventListener('click', functio
     }
 });
 
+var perSec;
+
 function startAuto() {
     auto = (autoclickers * 0.010 + workers * 0.10 + restaurants * 0.80 + factories * 4.70) * production;
     amount += auto;
 
     document.getElementById('clicks').innerHTML = amount.toFixed(0);
-    document.getElementById('sPerSec').innerHTML = "SpS: " + auto.toFixed(1) * 10;
-    //autoSave();
+    perSec = auto * 10;
+    document.getElementById('sPerSec').innerHTML = "SpS: " + perSec.toFixed(1);
+    autoSave();
 
     setTimeout(startAuto, 100);
 }
